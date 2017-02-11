@@ -1,0 +1,254 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<nav class="pink lighten-1" role="navigation">
+  <div class="nav-wrapper container">
+	<a id="logo-container" href="#" class="brand-logo">
+		<span>MemCock</span>
+		<span style="font-size: 14pt; margin-left: -5px;">.tk</span>
+	</a>
+	<div class="right-align hide-on-med-and-down">Training sissies since 2016</div>
+  </div>
+</nav>
+<div id="content" class="container">
+	<div class="section">
+		<div id="config-panel">
+			<form id="config-form" action="">
+				<div class="row">
+					<div class="col s12 m6">
+						<div class="card-panel pink lighten-5">
+							<label>Popular subreddits</label>
+							<ul class="collection pink lighten-5">
+								{% for sub, hits in popular %}
+								<li class="collection-item">
+									<div>
+										{{ sub }}
+										<span class="secondary-content">{{ hits }}</span>
+
+								</li>
+								{% endfor %}
+						    </ul>
+						</div>
+					</div>
+					<div class="col s12 m6">
+						<div class="card-panel pink lighten-5">
+							<div class="row">
+								<label class="col s12 m11 offset-m1">Images are pulled from reddit, you can change the names of the subreddits here.</label>
+							</div>
+							<div class="row">
+								<div class="input-field col s6 m5 offset-m1">
+									<input autocomplete="off" id="babe_src" type="text" class="validate autocomplete" name="babesrc" value="{{ babesrc }}">
+									<label for="first_name">Babes</label>
+								</div>
+								<div class="input-field col s6 m5">
+									<input autocomplete="off" id="cock_src" type="text" class="validate autocomplete" name="cocksrc" value="{{ cocksrc }}">
+									<label for="last_name">Cocks</label>
+								</div>
+							</div>
+						</div>
+						<div class="card-panel pink lighten-5">
+							<div class="row">
+								<div class="col s12 m10 offset-m1">
+									<p class="range-field">
+										<label for="pairs">Number of pairs - Current: {{ pairs }}</label>
+										<input type="range" id="pairs" min="1" max="100" value="{{ pairs }}" name="pairs"/>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col s12 m6">
+					</div>
+					<div class="col s12">
+						<div class="card-panel pink lighten-5">
+							<div class="row">
+								<div class="col s12 m5 offset-m1">
+									<p class="range-field">
+										<label for="pairs">Seconds before enabling next button. Set to 0 to disable</label>
+										<input  type="range" id="minTime" min="0" max="60" value="{{ minTime }}" name="minTime"/>
+									</p>
+								</div>
+								<div class="col s12 m5">
+									<p class="range-field">
+										<label for="pairs">Seconds before force advancing. Set to 0 to disable</label>
+										<input type="range" id="maxTime" min="0" max="60" value="{{ maxTime }}" name="maxTime"/>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col s12">
+						<div class="card-panel pink lighten-5">
+							<div class="row">
+								<div class="input-field col s12 m10 offset-m1">
+		  							<select name="failure_mode">
+										<option value="testing">Restart the test</option>
+										<option value="learning" selected>Restart at the beginning</option>
+										<option value="everything">Restart at the beginning with new images</option>
+
+									</select>
+									<label for="on_failure">What happens when you miss one?</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12 m4 offset-m1">
+									<select name="increase_min">
+										<option value="0" selected>0</option>
+										<option value="1">1</option>
+										<option value="5">5</option>
+										<option value="10">10</option>
+										<option value="15">15</option>
+										<option value="30">30</option>
+									</select>
+									<label for="increase_min">How much to increase the Minimum Time?</label>
+								</div>
+								<div class="input-field col s12 m4 offset-m2">
+									<select name="increase_max">
+										<option value="0" selected>0</option>
+										<option value="1">1</option>
+										<option value="5">5</option>
+										<option value="10">10</option>
+										<option value="15">15</option>
+										<option value="30">30</option>
+									</select>
+									<label for="increase_max">How much to increase the Maximum Time?</label>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col s12">
+						<div class="card-panel pink lighten-5">
+							<div class="row">
+								<!-- Switch -->
+								<div class="col s6 m4 offset-m1 center-align">
+									<label>Shuffle image when you miss one?</label>
+									<div class="switch">
+										<label>
+											Off
+											<input name="shuffle_on_failure" type="checkbox">
+											<span class="lever"></span>
+											On
+										</label>
+									</div>
+								</div>
+								<div class="col s6 m4 offset-m2 center-align">
+									<label>Shuffle images when starting test?</label>
+									<div class="switch">
+										<label>
+											Off
+											<input name="shuffle_always" type="checkbox">
+											<span class="lever"></span>
+											On
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+			<button id="begin" class="waves-effect waves-green btn-flat pink lighten-4" name="action">Begin</button>
+		</div>
+	</div>
+	<div id="progress">
+		<div class="section">
+			<h3 class='center'>Loading Images</h3>
+			<div class="progress">
+				<div class="indeterminate black"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script src="{{ url_for('static', filename='js/nouislider.min.js') }}"></script>
+<script>
+	$("#progress").hide();
+
+	$(document).ready(function() {
+	  $('select').material_select();
+	$("#progress").hide();
+	var slider = document.getElementById('pairs');
+	noUiSlider.create(slider, {
+	 start: 0,
+	 step: 1,
+	 range: {
+	   'min': 0,
+	   'max': 100
+	 },
+	});
+	var slider = document.getElementById('maxTime');
+	noUiSlider.create(slider, {
+	 start: 0,
+	 step: 1,
+	 range: {
+	   'min': 0,
+	   'max': 60
+	 },
+	});
+	var slider = document.getElementById('minTime');
+	noUiSlider.create(slider, {
+ 	 start: 0,
+	 step: 1,
+	 range: {
+	   'min': 0,
+	   'max': 60
+	 },
+	});
+	// $("#config-form").submit(function(event) {
+	// 	event.preventDefault();
+	// 	alert('clicked');
+	// 	$.post("{{ url_for('load.loadImages') }}", $("#config-form").serialize(), function (){
+	// 		poll();
+	// 		alert('finished');
+	// 	});
+	// });
+
+	$('#begin').click(function (){
+		$('#begin').addClass('disabled')
+		data = $('#config-form').serializeArray();
+		$.ajax('{{ url_for('load.loadImages') }}', {
+    				data : JSON.stringify(data),
+    				contentType : 'application/json',
+    				type : 'POST',
+					dataType: 'json',
+					success: function (data){
+							if (data.success) {
+								$("#config-panel").hide();
+								$('#progress').show();
+								poll();
+							} else {
+								Materialize.toast(data.error, 4000)
+								$('#begin').removeClass('disabled')
+							}
+						},
+					error: function (jqHXR, textStatus, errorThrown){
+						}
+					});
+				});
+
+	function poll(){
+	   setTimeout(function(){
+		//   alert('polling')
+	      $.ajax({ url: "{{ url_for('load.status') }}", success: function(data){
+	        //Update your dashboard gauge
+			if (data.success) {
+				window.location.href = "{{ url_for('learn.learn')}}"
+			}
+			poll();
+	      }, dataType: "json"});
+	  }, 1000);
+
+	};
+	  $('input.autocomplete').autocomplete({
+	    data: {
+		{%- for x in suggest -%}
+	      "{{ x | safe }}": null,
+		 {%- endfor -%}
+	    }
+	  });
+	});
+</script>
+{% endblock %}

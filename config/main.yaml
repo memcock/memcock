@@ -1,0 +1,21 @@
+---
+meta:
+    app: memcock
+    version: '0.2'
+
+app:
+    # uri: postgresql://scott:tiger@localhost/mydatabase
+    DB_DRIVER: postgresql://
+    DB_PATH: postgres/memcock
+    DB_USER: False
+    DB_PASS: False
+    SECRET_KEY: False
+    SQLALCHEMY_TRACK_MODIFICATIONS: False
+
+images:
+    babes: sexygirls
+    cocks: massivecock
+    setSize: 15
+
+lbscrape:
+    endpoint: http://lbscrape:8000

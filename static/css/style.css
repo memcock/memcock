@@ -1,0 +1,61 @@
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
+
+html {
+	font-family: 'Baloo Bhaina'
+}
+.icon-block {
+  padding: 0 15px;
+}
+.icon-block .material-icons {
+	font-size: inherit;
+}
+
+img.responsive {
+	height: auto;
+	max-width: 45%;
+	display: inline-block;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+img.responsive-choice {
+	max-height: 30%;
+	height: auto;
+	display: inline-block;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+img.left-pic {
+	margin-right: 5px;
+}
+img.right-pic {
+	margin-left: 5px;
+}
+
+img.center-pic {
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.choice {
+	text-align: center;
+	font
+	display: inline-block;
+}
+
+.hoverable:hover {
+  box-shadow: 0 10px 17px 0 rgba(255, 255, 255, 0.2), 0 8px 20px 0 rgba(255, 255, 255, 0.19);
+}
+
+.noUi-horizontal .noUi-handle {
+	background-color: #f50057;
+}

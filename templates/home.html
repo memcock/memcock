@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block body %}
+	<nav class="pink lighten-1" role="navigation">
+	  <div class="nav-wrapper container">
+		<a id="logo-container" href="#" class="brand-logo">
+			<span>MemCock</span>
+			<span style="font-size: 14pt; margin-left: -5px;">.tk</span>
+		</a>
+		<div class="right-align hide-on-med-and-down">Training sissies since 2016</div>
+	  </div>
+	</nav>
+	<div class="parallax-container ">
+		<div class="parallax"><img src="{{ url_for('static', filename='pics/home-top.jpg') }}"></div>
+	</div>
+	<div class="container">
+		<h2 class="center-align">We all know why you're here...</h2>
+		<p>It's not for the beautiful women. It's for the <b style="font-size: 13pt;">cocks</b>.
+			Yeah, that's right, you like big, meaty <b style="font-size: 13pt;">cocks</b>. You dream of them,
+			nothing but <b>massive</b> man meat dancing through your head all night long. What would you do
+			to finally get your hands on one? Or have you already? I bet you have. There's no way that you
+			can be that big of a <b>sissy</b> without having experienced a hard <b>cock</b> in your mouth, licking,
+			sucking, hoping, no, <b>praying</b>! that you'll be rewarded with some deliciously sticky hot cum pouring
+			down the back of your <b>sissy</b> throat. You're probably sitting right there rubbing your <b>pitiful</b> excuse
+			for a <b>sissy clit</b> just thinking about it aren't you? Well don't worry thats all you'l get. By the time
+			you're done here you won't even be able to look at a sexy women without thinking of
+			<b style="font-size: 13pt;">huge throbbing cock</b>. Let the games begin...
+		</p>
+		<div class="row">
+			<div class="col s2 offset-s5">
+				<a href="{{url_for('load.setup')}}" style="width: auto;" class="waves-effect waves-light btn black pink-text btn-large">Start</a>
+			</div>
+		</div>
+	</div>
+	<div class="parallax-container">
+		<div class="parallax"><img src="{{ url_for('static', filename='pics/home-bot.jpg') }}"></div>
+	</div>
+
+{% endblock %}
+
+{% block script %}
+<script>
+	$(document).ready(function(){
+		$('.parallax').parallax();
+	});
+</script>
+{% endblock %}

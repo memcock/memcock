@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block body %}
+	<div class="section">
+		<div id="imageWrapper" class="row valign-wrapper">
+			<img id="babe" class="responsive valign images left-pic" src="{{ babe }}">
+			<img id="cock" class="responsive valign images right-pic" src="{{ cock }}">
+		</div>
+		<a id="next" class="waves-effect waves-light pink-text text-accent-3 btn btn-large black waves-pink" style="position: fixed; right: 10px; font-size: 18pt;">Next</a>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block script %}
+<script src="{{ url_for('static', filename='js/learn.js') }}"></script>
+<script src="{{ url_for('static', filename='js/imagesLoaded.js') }}"></script>
+<script>
+	// get new image set from server
+	$('#next').click(getNext);
+
+	var minTime = {{ minTime }};
+	var maxTime = {{ maxTime }};
+	var preloaded = {{ images|safe }};
+	var i, s, len = preloaded.length;
+	for (i=0; i<len; ++i) {
+  		if (i in preloaded) {
+    		s = preloaded[i];
+    		$('<img/>')[0].src = s;
+  		}
+	}
+	
+</script>
+{% endblock %}

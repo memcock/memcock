@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="section">
+	<div id="imageWrapper" class="row valign-wrapper center-align">
+		<img id="babe" class="responsive-choice valign left-pic images" src="{{ babe }}">
+		<div class="waves-effect waves-light">
+			<img id="cock1" class="responsive-choice valign center-pic images hoverable" src="{{ cocks[0].link }}" data-cock="{{ hash_id(cocks[0]) }}">
+		</div>
+		<div class="waves-effect waves-light">
+			<img id="cock2" class="responsive-choice valign center-pic images hoverable" src="{{ cocks[1].link }}" data-cock="{{ hash_id(cocks[1]) }}">
+		</div>
+		<div class="waves-effect waves-light">
+			<img id="cock3" class="responsive-choice valign right-pic  images hoverable" src="{{ cocks[2].link }}" data-cock="{{ hash_id(cocks[2]) }}">
+		</div>
+	</div>
+</div>
+</div>
+<div id="modal-failure" class="modal">
+	<div class="modal-content pink lighten-2 center-align">
+		<h4>OOPS!</h4>
+		<p>It seems you weren't paying enough attention to those cocks. Looks like you'll have to start over!</p>
+	</div>
+</div>
+<div id="modal-success" class="modal">
+	<div class="modal-content pink lighten-2 center-align">
+	  <h4>Congrats!</h4>
+	  <p>It seems that you really do love <b>cocks</b>! Time for another game?</p>
+	</div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="{{ url_for('static', filename='js/imagesLoaded.js') }}"></script>
+<script src="{{ url_for('static', filename='js/recall.js') }}"></script>
+
+<script>
+	$('.hoverable').click(checkChoice);
+	var failure_mode = '{{ failure_mode }}'
+</script>
+{% endblock %}
