@@ -2,7 +2,7 @@ sudo: required
 language: python
 services:
 - docker
-before_install:
+script:
 - docker build -t "$DOCKER_USER/memcock" .
 - docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
 - docker push "$DOCKER_USER/memcock"
