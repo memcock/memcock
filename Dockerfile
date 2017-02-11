@@ -13,7 +13,6 @@ RUN apk --update add python3 uwsgi uwsgi-python3 postgresql-libs && \
 
 COPY ./s6/services.d /etc/services.d
 COPY ./s6/init /etc/cont-init.d
-COPY ./scripts/renew-certs /usr/bin/
 
 COPY . /app
 WORKDIR /app
