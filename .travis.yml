@@ -3,7 +3,8 @@ language: python
 services:
 - docker
 script:
-- docker build -t "$DOCKER_USER/memcock" .
+- docker build -t "$DOCKER_USER/memcock:$(echo $TRAVIS_COMMIT | cut -c-10)" .
+- docker tag memcock/memcock memcock/memock:latest
 - docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
 - docker push "$DOCKER_USER/memcock"
 env:
