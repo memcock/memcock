@@ -20,8 +20,8 @@ if config.get('app', False):
 # create Database
 if config.get('app', {}).get('DB_PATH', False):
 	dbpath = '%s%s:%s@%s'%(config['app']['DB_DRIVER'],
-							config['app']['DB_USER'],
-							config['app']['DB_PASS'],
+							config['database']['user'],
+							config['database']['password'],
 							config['app']['DB_PATH'])
 	# dbpath = config['app']['DB_URI'] + config['app']['DB_PATH']
 	print(dbpath)

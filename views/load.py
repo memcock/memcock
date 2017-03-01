@@ -3,7 +3,6 @@ from app import app
 from lib.template import templated
 from lib.match import createImageSet
 from config import config
-from lib.utils import IDHasher
 from lib.game import Game, buildGame
 from lib.query import checkSubreddit, getImageLinks
 from lib.database import getPopular, insertImages

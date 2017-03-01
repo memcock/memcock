@@ -25,8 +25,8 @@ if __name__ == '__main__':
 	for x in range(10):
 		if check_server('postgres', 5432):
 			dbUri = '%s%s:%s@%s'%(config.app.DB_DRIVER, 
-									config.app.DB_USER,
-									config.app.DB_PASS,
+									config.database.user,
+									config.database.password,
 									config.app.DB_PATH)
 			engine = create_engine(dbUri)
 			if not database_exists(engine.url):

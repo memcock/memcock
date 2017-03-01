@@ -11,6 +11,9 @@ app:
     DB_PASS: False
     SECRET_KEY: False
     SQLALCHEMY_TRACK_MODIFICATIONS: False
+database:
+    user: False
+    password: False
 
 images:
     babes: sexygirls

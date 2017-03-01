@@ -1,5 +1,4 @@
 from app import db
-from lib.utils import IDHasher
 from sqlalchemy.sql import func
 import datetime
 
@@ -33,6 +32,6 @@ class ImagePair(db.Model):
 		self.cock = cock
 
 	def __repr__(self):
-		babe = 'babe: %s'%IDHasher.encode(self.babe_id)
-		cock = 'cock: %s'%IDHasher.encode(self.cock_id)
+		babe = 'babe: %s'%self.babe.fullname
+		cock = 'cock: %s'%self.cock.fullname
 		return '<ImagePair %s %s>'%(babe, cock)

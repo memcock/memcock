@@ -2,6 +2,8 @@ sudo: required
 language: python
 services:
 - docker
+before_install:
+- echo "$TRAVIS_COMMIT"
 script:
 - docker build -t "$DOCKER_USER/memcock" .
 - docker tag "$DOCKER_USER/memcock:latest" "$DOCKER_USER/memcock:$(echo $TRAVIS_COMMIT | cut -c-10)"

@@ -45,8 +45,8 @@ class Game:
 	def _shuffle(self):
 		random.shuffle(self.order)
 
-	def check(self, id):
-		if self.current.cock.id == id:
+	def check(self, fullname):
+		if self.current.cock.fullname == fullname:
 			return True
 		self.onFailure()
 		return False

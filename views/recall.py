@@ -4,7 +4,6 @@ from lib.template import templated
 from lib.match import generateChoices, checkChoice, shuffleImageSet
 import json
 from lib.utils import randomOrder
-from lib.utils import IDHasher
 
 recall_app = Blueprint('recall', __name__)
 
@@ -44,7 +43,7 @@ def checkMatch(choice):
 	if not session.get('game', False):
 		return '', 406
 	game = session['game']
-	if game.check(IDHasher.decode(choice)[0]):
+	if game.check(choice[0]):
 		if game.next:
 			return '', 200
 		return '', 204

@@ -3,13 +3,7 @@ from app import app
 from lib.template import templated
 from config import config
 import json
-from lib.utils import IDHasher
 import uuid
-
-def hash_id(model):
-    return IDHasher.encode(model.id)
-
-app.jinja_env.globals.update(hash_id=hash_id)
 
 from views.learn import learn_app
 app.register_blueprint(learn_app)

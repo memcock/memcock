@@ -1,6 +1,4 @@
-from hashids import Hashids
 from config import config
-import hashlib
 import random
 
 def SRCHasher(src):

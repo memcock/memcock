@@ -1,7 +1,7 @@
 from flask import Blueprint, redirect, url_for, render_template, session, jsonify
 from app import app
 from lib.template import templated
-from lib.match import getImagePair, shuffleImageSet
+# from lib.match import getImagePair, shuffleImageSet
 from lib.utils import randomOrder
 import json
 

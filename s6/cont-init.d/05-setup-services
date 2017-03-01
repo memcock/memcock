@@ -2,6 +2,7 @@
 
 if [ $MODE = 'dev' ]; then
 	rm -rf /etc/services.d/uwsgi
+	rm -rf /etc/services.d/nginx
 fi
 
 if [ $MODE = 'prod' ]; then

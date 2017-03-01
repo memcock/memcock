@@ -2,7 +2,7 @@ from app import db
 from models.images import Image
 from models.imageSets import ImageSet
 from models.stats import SubReddit
-from lib.utils import IDHasher
+# from lib.utils import IDHasher
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.sql import func
 from config import getLogger
@@ -13,8 +13,8 @@ def getImages(src, shuffle = True):
 		return Image.query.filter_by(src = src).order_by(func.random()).all()
 	return Image.query.filter_by(src = src).all()
 
-def getImageSet(id):
-	return ImageSet.query.get(IDHasher.decode(id))
+# def getImageSet(id):
+# 	return ImageSet.query.get(IDHasher.decode(id))
 
 def getSubReddit(subreddit, create = True):
 	subreddit = subreddit.lower()

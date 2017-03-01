@@ -1,4 +1,3 @@
-from lib.utils import IDHasher
 from models.imageSets import ImageSet, ImagePair
 from app import db
 import random
@@ -24,10 +23,10 @@ def createImageSet(babes, cocks, babesrc, cocksrc):
 	return imageSet, ids
 
 
-def getImagePair(id, index):
-	imageSet = ImageSet.query.get(IDHasher.decode(id))
-	imageSet.last_used = datetime.datetime.utcnow()
-	return imageSet.pairs[index]
+# def getImagePair(id, index):
+# 	imageSet = ImageSet.query.get(IDHasher.decode(id))
+# 	imageSet.last_used = datetime.datetime.utcnow()
+# 	return imageSet.pairs[index]
 
 def generateChoices(correct, image_set, subreddit, count = 2):
 	others = [x.cock for x in image_set.pairs]

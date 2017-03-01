@@ -1,6 +1,5 @@
 from app import db
 import uuid
-from lib.utils import IDHasher, SRCHasher
 import hashlib
 from sqlalchemy.sql import func
 import datetime
@@ -32,4 +31,4 @@ class Image(db.Model):
 		db.session.commit()
 
 	def __repr__(self):
-		return '<Image %s>'%IDHasher.encode(self.id)
+		return '<Image %s>'%self.fullname
