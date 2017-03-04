@@ -3,18 +3,21 @@ language: python
 services:
 - docker
 before_install:
-- openssl aes-256-cbc -K $encrypted_9ad22a92b11d_key -iv $encrypted_9ad22a92b11d_iv
-  -in deploy_key.enc -out ./deploy_key -d
 - echo "$TRAVIS_COMMIT"
 script:
 - docker build -t "$DOCKER_USER/memcock" .
 - docker tag "$DOCKER_USER/memcock:latest" "$DOCKER_USER/memcock:$(echo $TRAVIS_COMMIT| cut -c-10)"
 - docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
 - docker push "$DOCKER_USER/memcock"
+before_deploy:
+- openssl aes-256-cbc -K $encrypted_9ad22a92b11d_key -iv $encrypted_9ad22a92b11d_iv -in deploy_key.enc -out /tmp/deploy_key -d
+- eval "$(ssh-agent -s)"
+- chmod 600 /tmp/deploy_key
+- ssh-add /tmp/deploy_key
 deploy:
  provider: script
  skip_cleanup: true
- script: chmod 600 deploy_key && ssh -o StrictHostKeyChecking=no -i deploy_key admin@memcock.tk ./deploy.sh memcock $(echo $TRAVIS_COMMIT| cut -c-10)
+ script: ssh -o StrictHostKeyChecking=no admin@memcock.tk "./deploy.sh memcock $(echo $TRAVIS_COMMIT| cut -c-10)"
  on:
    branch: master
 env:
