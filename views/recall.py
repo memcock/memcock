@@ -44,7 +44,7 @@ def checkMatch(choice):
 		print('Failed for: No Game')
 		return '', 406
 	game = session['game']
-	if game.check(choice[0]):
+	if game.check(choice):
 		if game.next:
 			return '', 200
 		return '', 204
