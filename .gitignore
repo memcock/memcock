@@ -5,3 +5,5 @@ certs/
 dev/
 .venv
 subs.json
+deploy_key
+deploy_key.pub
