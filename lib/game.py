@@ -2,6 +2,59 @@ from models.imageSets import ImageSet
 import random
 from flask import session
 from lib.match import generateChoices, createImageSet
+from config import config
+
+class JBContainer:
+	fields = {}
+	def __init__(self, **kwargs):
+		for field in self.fields:
+			value = kwargs.get(field, self.fields.get(field, None))
+			setattr(self, field, value)
+
+	def __repr__(self):
+		name = self.__class__.__name__
+		template = '<%s %s>'%(name,', '.join(['%s: %s' for x in range(len(self.fields.keys()))]))
+		args = []
+		for field in sorted(self.fields.keys()): # sort the keys to provide a semiconstant repr
+			args.append(field)
+			args.append(getattr(self, field, None))
+		return template%tuple(args)
+
+	def _dump(self):
+		return { key: getattr(self, key, None) for key in self.fields.keys()}
+
+class Rules(JBContainer):
+	fields = dict(
+		minimum_time = 0,
+		maximum_time = 0,
+		shuffle_on_failure = False,
+		shuffle_on_test = False,
+		increase_max = False,
+		increase_min = False,
+		failure_mode = 'learning'
+		)
+
+
+class Deck(JBContainer):
+	fields = dict(
+		babsrc = config.images.babes,
+		cocksrc = config.images.cocks,
+		size = config.images.setSize,
+		order = [x for x in range(config.images.setSize)],
+		index = 0,
+		set_id = None
+	)
+	def shuffle(self):
+		random.shuffle(self.order)
+
+# class Game:
+# 	def __init__(self, deck, rules = None):
+# 		self.deck = deck
+# 		self.rules = rules
+
+# 	def 
+
+
 
 class Game:
 	def __init__(self, babesrc = None, cocksrc = None, pairs = 15, minTime = 0, maxTime = 0, used = [], **kwargs):
@@ -46,6 +99,7 @@ class Game:
 		random.shuffle(self.order)
 
 	def check(self, fullname):
+		print(self.current.cock.fullname, fullname)
 		if self.current.cock.fullname == fullname:
 			return True
 		self.onFailure()
