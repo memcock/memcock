@@ -41,12 +41,14 @@ def recallNext():
 def checkMatch(choice):
 	session.modified = True
 	if not session.get('game', False):
+		print('Failed for: No Game')
 		return '', 406
 	game = session['game']
 	if game.check(choice[0]):
 		if game.next:
 			return '', 200
 		return '', 204
+	print('Failed for: Incorrect Choice')
 	return '', 406
 
 @recall_app.route('/recall/failure')
