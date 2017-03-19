@@ -54,7 +54,7 @@ def status():
 		used = session.get('used_pics', [])
 		session['used_pics'] = used + game.used
 		return jsonify(success = True)
-	percent = math.floor(((bPercent + cPercent) /2) * 10 ) 
+	percent = math.floor(((bPercent + cPercent) /2) * 100 ) 
 	return jsonify(success = False, percent = percent)
 
 @load_app.route('/load/config')
