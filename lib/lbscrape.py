@@ -33,8 +33,8 @@ class LBScrape:
 		endpoint = self._build_queue_endpoint(job_id)
 		resp = requests.get(endpoint)
 		if resp.status_code == 303 and resp.json()['result']['complete']:
-			return True
-		return False
+			return True, resp.json()['result']['progress']
+		return False, resp.json()['result']['progress']
 
 	def _check_subreddit_validity(self, subreddit):
 		resp = requests.get(self._build_check_endpoint(subreddit))

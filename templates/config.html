@@ -154,7 +154,7 @@
 		<div class="section">
 			<h3 class='center'>Loading Images</h3>
 			<div class="progress">
-				<div class="indeterminate black"></div>
+				<div id="loading-bar" class="determinate black" style="width: 0%"></div>
 			</div>
 		</div>
 	</div>
@@ -236,6 +236,8 @@
 	        //Update your dashboard gauge
 			if (data.success) {
 				window.location.href = "{{ url_for('learn.learn')}}"
+			} else {
+				$('#loading-bar').css('width', data.percent)
 			}
 			poll();
 	      }, dataType: "json"});

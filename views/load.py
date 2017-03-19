@@ -8,6 +8,7 @@ from lib.query import checkSubreddit, getImageLinks
 from lib.database import getPopular, insertImages
 from lib.lbscrape import job_from_id
 load_app = Blueprint('load', __name__)
+import math
 
 @load_app.route('/load', methods = ['POST'])
 def loadImages():
@@ -41,7 +42,9 @@ def status():
 	babe_id = session.get('babe_job_id', None)
 	babe_job = job_from_id(babe_id)
 	cock_job = job_from_id(cock_id)
-	if babe_job.status and cock_job.status:
+	bStatus, bPercent = babe_job.status
+	cStatus, cPercent = cock_job.status
+	if bStatus and cStatus:
 		babe_links = babe_job.results
 		cock_links = cock_job.results
 		babes = insertImages(babe_links)
@@ -51,7 +54,8 @@ def status():
 		used = session.get('used_pics', [])
 		session['used_pics'] = used + game.used
 		return jsonify(success = True)
-	return jsonify(success = False)
+	percent = math.floor(((bPercent + cPercent) /2) * 10 ) 
+	return jsonify(success = False, percent = percent)
 
 @load_app.route('/load/config')
 @templated('config.html')
