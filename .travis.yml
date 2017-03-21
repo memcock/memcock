@@ -17,7 +17,7 @@ before_deploy:
 deploy:
  provider: script
  skip_cleanup: true
- script: ssh -o StrictHostKeyChecking=no admin@memcock.tk "./deploy.sh memcock $(echo $TRAVIS_COMMIT| cut -c-10)"
+ script: ssh -o StrictHostKeyChecking=no memcock@memcock.tk "./memcock.sh deploy memcock $(echo $TRAVIS_COMMIT| cut -c-10)"
  on:
    branch: master
 env:

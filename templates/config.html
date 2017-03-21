@@ -237,7 +237,8 @@
 			if (data.success) {
 				window.location.href = "{{ url_for('learn.learn')}}"
 			} else {
-				$('#loading-bar').css('width', data.percent)
+				per = '$%'.replace(data.percent)
+				$('#loading-bar').css('width', per)
 			}
 			poll();
 	      }, dataType: "json"});
