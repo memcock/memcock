@@ -237,7 +237,7 @@
 			if (data.success) {
 				window.location.href = "{{ url_for('learn.learn')}}"
 			} else {
-				per = '$%'.replace(data.percent)
+				per = data.percent + '%'
 				$('#loading-bar').css('width', per)
 			}
 			poll();
