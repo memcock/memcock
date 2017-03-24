@@ -154,7 +154,7 @@
 		<div class="section">
 			<h3 class='center'>Loading Images</h3>
 			<div class="progress">
-				<div id="loading-bar" class="determinate black" style="width: 0%"></div>
+				<div id="loading-bar" class="indeterminate black" style="width: 0%"></div>
 			</div>
 		</div>
 	</div>
@@ -237,8 +237,12 @@
 			if (data.success) {
 				window.location.href = "{{ url_for('learn.learn')}}"
 			} else {
-				per = data.percent + '%'
-				$('#loading-bar').css('width', per)
+				if (data.percent != 0){
+					per = data.percent + '%'
+					$('#loading-bar').removeClass('indeterminate')
+					$('#loading-bar').addClass('determinate')
+					$('#loading-bar').css('width', per)
+				}
 			}
 			poll();
 	      }, dataType: "json"});
