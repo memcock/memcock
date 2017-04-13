@@ -1,4 +1,6 @@
+blinker==1.4
 click==6.7
+contextlib2==0.5.4
 Flask==0.12.1
 Flask-KVSession==0.6.2
 Flask-SQLAlchemy==2.2
@@ -7,6 +9,7 @@ Jinja2==2.9.6
 MarkupSafe==1.0
 psycopg2==2.7.1
 PyYAML==3.12
+raven==6.0.0
 redis==2.10.5
 requests==2.13.0
 simplekv==0.10.0

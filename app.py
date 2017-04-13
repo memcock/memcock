@@ -6,13 +6,14 @@ import redis
 from flask_kvsession import KVSessionExtension
 from simplekv.decorator import PrefixDecorator
 from simplekv.memory.redisstore import RedisStore
+from raven.contrib.flask import Sentry
 
 app = Flask(__name__)
+sentry = Sentry(app, logging=True, level=logging.ERROR)
 
 store = RedisStore(redis.StrictRedis(host = 'redis', db = 1))
 prefixed_store = PrefixDecorator('sessions_', store)
 KVSessionExtension(store, app)
-
 if config.get('app', False):
 	app.config.update(**config['app'])
 	app.config['DEBUG'] = True
