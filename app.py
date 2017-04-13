@@ -9,7 +9,7 @@ from simplekv.memory.redisstore import RedisStore
 from raven.contrib.flask import Sentry
 
 app = Flask(__name__)
-sentry = Sentry(app, logging=True, level=logging.ERROR)
+sentry = Sentry(app)
 
 store = RedisStore(redis.StrictRedis(host = 'redis', db = 1))
 prefixed_store = PrefixDecorator('sessions_', store)
