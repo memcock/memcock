@@ -29,6 +29,8 @@ def createImageSet(babes, cocks, babesrc, cocksrc):
 # 	return imageSet.pairs[index]
 
 def generateChoices(correct, image_set, subreddit, count = 2):
+	if count <= len(image_set.pairs):
+		count = len(image_set.pairs) - 1
 	others = [x.cock for x in image_set.pairs]
 	others = [x for x in others if x.id != correct.cock.id]
 	choices = random.sample(others, count)
